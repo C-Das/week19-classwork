@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="getSwole">
+<head>
+  <title>Angular Code</title>
+</head>
+<body>
+  <section ng-controller="workoutListController">
+    <h1>{{title}}</h1>
+    <form ng-submit="addWorkout()">
+        <select id="repearSelect" id="repearSelect" ng-model="exercise.muscleGroup">
+          <option>---Choose a Muscle Group----</option>
+         <option ng-repeat="group in exerciseGroups" value="{{group}}">{{group}}</option>
+        </select>
+      <input type="text" placeholder="Exercise Name" ng-model="exercise.Exercise">
+      <input type="date" placeholder="mm/dd/yyyy" ng-model="exercise.Date">
+      <input type="text" placeholder="Weight" ng-model="exercise.Eeight">
+      <input type="text" placeholder="Reps" ng-model="exercise.Reps">
+      <button type="submit">Add</button>
+    </form>
+    <h1> Display details</h1>
+    <div ng-hide="workouts[0]">Add a Workout</div>
+    <table ng-show="workouts[0]">
+        <tr>
+          <th>Date</th>
+          <th>Muscle Group</th>
+          <th>Exercise</th>
+          <th>Weight</th>
+          <th>Reps</th>
+        </tr>
+        <tr ng-repeat="workout in workouts">
+          <td>{{workout.Date | date}}</td>
+          <td>{{workout.muscleGroup}}</td>
+          <td>{{workout.Exercise}}</td>
+          <td>{{workout.Weight}}</td>
+          <td>{{workout.Reps}}</td>
+        </tr>
+    </table>
+  </section>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
+  <script type="text/javascript" src="./app.js"></script>
+</body>
+</html>
