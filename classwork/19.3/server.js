@@ -22,13 +22,28 @@ app.get('/', function(req, res) {
 
 app.get('/orders', function(req, res){
 //find all orders
-
+Order.find(function(err,docs){
+  if(err){
+    console.log(err);
+    res.send(err);
+  }else {
+    res.send(docs);
+  }
+});
 
 });
 
 app.post('/neworder', function(req, res){
-//create a new order
-
+ console.log("New Order created");
+ var newOrder = new Order(req.body);
+ newOrder.save(function(err,doc){
+  if(err){
+    console.log(err);
+    res.send(err);
+  } else {
+    res.send(doc);
+  }
+ });
 
 });
 

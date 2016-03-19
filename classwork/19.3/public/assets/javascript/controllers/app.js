@@ -7,11 +7,10 @@ angular.module('orderApp', [])
 
       orderList.addOrder = function() {
         var newOrder = {
-
           //Grab the recipe form data and complete this object to be submitted to the server
           //hint: check out the recipeList object
-          address:,
-          notes:,
+          address:orderList.address,
+          notes:orderList.notes,
           items: orderList.itemBoxes,
         };
         $http({
@@ -19,23 +18,30 @@ angular.module('orderApp', [])
           url:'/neworder',
           data: newOrder
         }).then(function (result){
-
+          orderList.orders.push(result.data);
+          orderList.address='';
+          orderList.notes='';
+          orderList.itemBoxes=[];
+          orderList.itemBoxCounter=0;
           //push the result to the orderList.orders array
           //clear the form and reset the itemBoxCounter
         });
       };
 
       orderList.getOrders = function() {
+        console.log("attempting to get orders");
         $http({
           method: 'GET',
           url: '/orders'
         }).then (function (result){
           //loop over the results and push them to the orderList.orders array
-
-
+          // console.log("We are getting our orders");
+          // console.log(result);
+            angular.forEach(result.data, function(order){
+              orderList.orders.push(order);
+            });
           });
         };
-
         orderList.addItemBox = function(){
           orderList.itemBoxes.push({
             name:"item" + orderList.itemBoxCounter,
@@ -44,7 +50,5 @@ angular.module('orderApp', [])
           orderList.itemBoxCounter++;
         };
 
-
       orderList.getOrders();
     });
-Status API Training Shop Blog About
