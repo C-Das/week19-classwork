@@ -1,10 +1,12 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var User = require('./user.js');
 
-var CommentSchema = new mongoose.Schema ({
-  _owner:{type: Schema.Types.ObjectId, ref:'User'}
+var CommentSchema = new Schema ({
+  _owner:{type: Schema.Types.ObjectId, ref:'User'},
   itemLink : String,
   CommentMessage :String,
 });
 
-var Comment = mongoose.model("Item",CommentSchema);
+var Comment = mongoose.model("Comment",CommentSchema);
 module.exports = Comment;

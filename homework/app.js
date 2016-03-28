@@ -11,6 +11,7 @@ var PORT = 3000;
 
 //connect to Mongodb
 mongoose.connect("mongodb://localhost/yard-sale");
+require('./models/model.js');
 require('./models/user.js');
 require('./models/comment.js');
 require('./models/item.js');
@@ -34,8 +35,6 @@ app.set('view engine', 'ejs');
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./models/models.js');
-
 var initPassport = require('./passport-init');
 initPassport(passport);
 
@@ -45,4 +44,4 @@ app.use('/auth',authenticate);
 
 app.listen(PORT,function (){
   console.log("Application is listening on PORT:"+PORT)
-})
+});
